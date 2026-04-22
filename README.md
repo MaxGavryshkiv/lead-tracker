@@ -25,7 +25,7 @@
 1. **Клонуйте репозиторій:**
 
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/MaxGavryshkiv/lead-tracker
    cd lead-tracker
    ```
 
