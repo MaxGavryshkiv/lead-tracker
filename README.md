@@ -47,31 +47,94 @@
 
 **Backend**
 
-Перейдіть у папку: cd backend
+Перейдіть у папку:
 
-Встановіть залежності: npm install
+```bash
+cd backend
+```
+
+Встановіть залежності:
+
+```bash
+npm install
+```
 
 Створіть файл .env на основі .env.example та вкажіть ваш DATABASE_URL.
 
-Запустіть міграції Prisma: npx prisma migrate dev
+Запустіть міграції Prisma:
 
-Запустіть сервер: npm run start:dev
+```bash
+npx prisma migrate dev
+```
+
+Запустіть сервер:
+
+```bash
+npm run start:dev
+```
 
 **Frontend**
 
-Перейдіть у папку: cd frontend
+Перейдіть у папку:
 
-Встановіть залежності: npm install
+```bash
+cd frontend
+```
+
+Встановіть залежності:
+
+```bash
+npm install
+```
 
 Створіть файл .env.local на основі .env.example.
 
-Запустіть проект: npm run dev
+Запустіть проект:
 
-| #   | Метод | Ендпоінт                | Опис                             |
-| --- | ----- | ----------------------- | -------------------------------- |
-| 1   | GET   | /api/leads              | Отримати список лідів            |
-| 2   | POST  | /api/leads              | Створення нового ліда            |
-| 3   | GET   | /api/leads/:id          | Детальна інформація про ліда     |
-| 4   | PATCH | /api/leads/:id          | Оновлення статусу або даних ліда |
-| 5   | GET   | /api/leads/:id/comments | Отримати всі коментарі до ліда   |
-| 6   | POST  | /api/leads/:id/comments | Додати новий коментар            |
+```bash
+npm run dev
+```
+
+Найзручніший спосіб ознайомитися з усіма методами — скористатися Swagger UI:
+http://localhost:3001/api/docs
+
+| #   | Метод | Ендпоінт                | Опис                                                     |
+| --- | ----- | ----------------------- | -------------------------------------------------------- |
+| 1   | GET   | /api/leads              | Запит повертає список лідів з пагінацією та фільтрацією. |
+| 2   | POST  | /api/leads              | Створення нового ліда                                    |
+| 3   | GET   | /api/leads/:id          | Детальна інформація про ліда                             |
+| 4   | PATCH | /api/leads/:id          | Оновлення статусу або даних ліда                         |
+| 5   | GET   | /api/leads/:id/comments | Отримати всі коментарі до ліда                           |
+| 6   | POST  | /api/leads/:id/comments | Додати новий коментар                                    |
+
+1. Отримати всіх лідів(GET):
+   "http://localhost:3001/api/leads?status=NEW&sort=createdAt&order=desc"
+
+2. Створення нового ліда(POST):
+   "http://localhost:3001/api/leads"
+   {
+   "name": "Dmitry Smith",
+   "email": "d.smith@google.com",
+   "company": "Google",
+   "status": "IN_PROGRESS",
+   "value": 15000,
+   "notes": "VIP клієнт, потрібен особливий підхід"
+   }
+
+3. Отримати інформацію про ліда(GET):
+   "http://localhost:3001/api/leads/1"
+
+4. Оновлення ліда(PATCH):
+   "http://localhost:3001/api/leads/1"
+   {
+   "status": "IN_PROGRESS"
+   }
+
+5. Отримати всі коментарі до ліда(GET):
+   "http://localhost:3001/api/leads/1/comments"
+
+6. Додати новий коментар(POST):
+   "http://localhost:3001/api/leads/1/comments"
+   {
+   "content": "Це розлогий технічний коментар для перевірки ендпоінта."
+   }
